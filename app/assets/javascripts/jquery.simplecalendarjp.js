@@ -1950,7 +1950,7 @@ Calendar._TT["WEEKEND"] = "0,6";
 
 Calendar._TT["CLOSE"] = "閉じる";
 Calendar._TT["TODAY"] = "今日";
-Calendar._TT["TIME_PART"] = "(Shift-)Click or drag to change value";
+Calendar._TT["TIME_PART"] = "時刻調整はドラッグ or  (Shift-) クリック";
 
 // date formats
 Calendar._TT["DEF_DATE_FORMAT"] = "%Y-%m-%d";
