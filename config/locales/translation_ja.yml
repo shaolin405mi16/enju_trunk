@@ -850,6 +850,7 @@ ja:
         subject: 件名
         missing_issue: 欠号管理
         acceptance_number: 受入部数
+        printout_in_progress: 資料確認票の印刷を開始しました
       user_group:
         name: 名前
         display_name: 表示名
