@@ -2381,6 +2381,8 @@ ja:
     boolean_reserve_all_item: "全ての所蔵を予約対象とする"
     boolean_reserve_able_for_not_item: "予約できる"
     boolean_reserve_not_able_for_not_item: "予約できない"
+    boolean_autoprint: "自動印刷する"
+    boolean_not_autoprint: "自動印刷しない"
     error:
       over_checkouts_print_message: "貸出表に表示できるメッセージは最大全角%{num}文字までです"
       over_reminder_postal_card_message: "督促はがきに表示できるメッセージは最大全角%{num}文字までです"
