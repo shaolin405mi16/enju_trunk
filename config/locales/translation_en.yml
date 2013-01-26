@@ -156,8 +156,22 @@ en:
       manifestation_type: Manifestation type
       access_log: Access log
       keyword_count: Keyword count
+      terminal: Terminal
 
     attributes:
+      terminal:
+        ipaddr: IP Address
+        name: Hostname
+        comment: Comment
+        autoprint: Enable Auto-print?
+        checkouts: Checkout sheet
+        reserve: Reservation sheet
+        manifestation: Manifestation sheet
+        checkouts_autoprint: Auto-print checkout sheet
+        reserve_autoprint: Auto-print reservation sheet
+        manifestation_autoprint: Auto-print manifestation sheet
+        boolean_yes: yes
+        boolean_no: no
       library:
         name: Name
         display_name: Display name

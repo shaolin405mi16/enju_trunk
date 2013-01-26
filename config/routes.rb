@@ -1,4 +1,6 @@
 EnjuLeaf::Application.routes.draw do
+  resources :terminals
+
   resources :numberings
   resources :departments
   resources :classmarks

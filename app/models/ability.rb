@@ -155,6 +155,7 @@ class Ability
         Subscription,
         SystemConfiguration,
         Term,
+        Terminal,
         UserCheckoutStat,
         UserGroupHasCheckoutType,
         UserHasRole,
@@ -357,6 +358,7 @@ class Ability
         SubjectType,
         SubjectHeadingType,
         SubjectHeadingTypeHasSubject,
+        Terminal,
         UseRestriction,
         UserGroup,
         UserGroupHasCheckoutType
@@ -457,6 +459,7 @@ class Ability
         Subject,
         SubjectHasClassification,
         SubjectHeadingType,
+        Terminal,
         UserCheckoutStat,
         UserReserveStat,
         UserStatus,

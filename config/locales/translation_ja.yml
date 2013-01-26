@@ -184,8 +184,22 @@ ja:
       bookbinding: 製本処理
       binding_item: 製本資料
       checkout_history: 今日の操作履歴
+      terminal: 端末
 
     attributes:
+      terminal:
+        ipaddr: IPアドレス
+        name: ホスト名
+        comment: コメント
+        autoprint: 自動印刷
+        checkouts: 貸出票
+        reserve: 予約票
+        manifestation: 資料確認票
+        checkouts_autoprint: 貸出票の自動印刷
+        reserve_autoprint: 予約票の自動印刷
+        manifestation_autoprint: 資料確認票の自動印刷
+        boolean_yes: する
+        boolean_no: しない
       user_status:
         name: 名前
         display_name: 表示名
