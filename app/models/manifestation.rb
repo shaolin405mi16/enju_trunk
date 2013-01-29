@@ -716,7 +716,8 @@ class Manifestation < ActiveRecord::Base
 
 
 private
-  def self.get_manifestation_list_excelx(manifestations, current_user)
+  def self.get_manifestation_list_excelx(manifestations, current_user, omit=[])
+    #omit = [:title]
     # initialize
     out_dir = "#{Rails.root}/private/system/manifestations_list_excelx" 
     excel_filepath = "#{out_dir}/list#{Time.now.strftime('%s')}#{rand(10)}.xlsx"
@@ -733,25 +734,24 @@ private
 
         wb.add_worksheet(:name => "item_list") do |sheet|
           # header line
-          columns = [
-            [:shelf, 'activerecord.models.shelf'],
-            [:item_identifier, 'activerecord.attributes.item.item_identifier'],
-            [:title, 'activerecord.attributes.manifestation.original_title'],
-            [:series, 'activerecord.attributes.series_statement.original_title'],
-            [:edition, 'activerecord.attributes.manifestation.edition'],
-            [:volume_number, 'activerecord.attributes.manifestation.volume_number_string'],
-            [:issue_number, 'activerecord.attributes.manifestation.issue_number_string'],
-            [:serial_number, 'activerecord.attributes.manifestation.serial_number_string'],
-            [:carrier_type, 'page.form'],
-            [:creator, 'patron.creator'],
-            [:contributor, 'patron.contributor'],
-            [:publisher, 'patron.publisher'],
-            [:pub_date, 'activerecord.attributes.manifestation.pub_date'],
-            [:acquired_at, 'activerecord.attributes.item.acquired_at'],
-            [:isbn, 'activerecord.attributes.manifestation.isbn'],
-            [:call_number, 'activerecord.attributes.item.call_number'],
-            [:circulation_status, 'activerecord.models.circulation_status'],
-          ]
+          columns = []
+          columns.push([:shelf, 'activerecord.models.shelf']) unless omit.include?(:shelf)
+          columns.push([:item_identifier, 'activerecord.attributes.item.item_identifier']) unless omit.include?(:item_identifier)
+          columns.push([:title, 'activerecord.attributes.manifestation.original_title']) unless omit.include?(:title)
+          columns.push([:series, 'activerecord.attributes.series_statement.original_title']) unless omit.include?(:series)
+          columns.push([:edition, 'activerecord.attributes.manifestation.edition']) unless omit.include?(:edition)
+          columns.push([:volume_number, 'activerecord.attributes.manifestation.volume_number_string']) unless omit.include?(:volume_number)
+          columns.push([:issue_number, 'activerecord.attributes.manifestation.issue_number_string']) unless omit.include?(:issue_number)
+          columns.push([:serial_number, 'activerecord.attributes.manifestation.serial_number_string']) unless omit.include?(:serial_number)
+          columns.push([:carrier_type, 'page.form']) unless omit.include?(:carrier_type)
+          columns.push([:creator, 'patron.creator']) unless omit.include?(:creator)
+          columns.push([:contributor, 'patron.contributor']) unless omit.include?(:contributor)
+          columns.push([:publisher, 'patron.publisher']) unless omit.include?(:publisher)
+          columns.push([:pub_date, 'activerecord.attributes.manifestation.pub_date']) unless omit.include?(:pub_date)
+          columns.push([:acquired_at, 'activerecord.attributes.item.acquired_at']) unless omit.include?(:acquired_at)
+          columns.push([:isbn, 'activerecord.attributes.manifestation.isbn']) unless omit.include?(:isbn)
+          columns.push([:call_number, 'activerecord.attributes.item.call_number']) unless omit.include?(:call_number)
+          columns.push([:circulation_status, 'activerecord.models.circulation_status']) unless omit.include?(:circulation_status)
 
           # title column
           row = columns.map{|column| I18n.t(column[1])}
@@ -836,29 +836,29 @@ private
     end
   end
 
-  def self.get_excel_row(manifestation, series_title = '', item = nil)
+  def self.get_excel_row(manifestation, series_title = '', item = nil, omit = [])
     creator = manifestation.creators.map{|patron| patron.full_name}
     contributor = manifestation.contributors.map{|patron| patron.full_name}
     publisher = manifestation.publishers.map{|patron| patron.full_name}
 
     row = []
-    row << (item.shelf.display_name.localize rescue "")
-    row << (item.item_identifier rescue "")
-    row << manifestation.original_title
-    row << series_title
-    row << (manifestation.isbn rescue "")
-    row << (manifestation.edition rescue "")
-    row << (manifestation.volume_number_string rescue "")
-    row << manifestation.issue_number_string
-    row << manifestation.serial_number_string
-    row << creator.join(',')
-    row << contributor.join(',')
-    row << publisher.join(',')
-    row << manifestation.pub_date
-    row << (item.acquired_at.strftime("%Y-%m-%d") rescue "")
-    row << (manifestation.isbn rescue "")
-    row << (item.call_number rescue "")
-    row << (item.circulation_status.display_name.localize rescue "")
+    row << (item.shelf.display_name.localize rescue "") unless omit.include?(:shelf)
+    row << (item.item_identifier rescue "") unless omit.include?(:item_identifier)
+    row << manifestation.original_title unless omit.include?(:title)
+    row << series_title unless omit.include?(:series)
+    row << (manifestation.edition rescue "") unless omit.include?(:edition)
+    row << (manifestation.volume_number_string rescue "") unless omit.include?(:volume_number)
+    row << manifestation.issue_number_string unless omit.include?(:issue_number)
+    row << manifestation.serial_number_string unless omit.include?(:serial_number)
+    row << manifestation.carrier_type.display_name.localize unless omit.include?(:carrier_type)
+    row << creator.join(',') unless omit.include?(:creator)
+    row << contributor.join(',') unless omit.include?(:contributor)
+    row << publisher.join(',') unless omit.include?(:publisher)
+    row << manifestation.pub_date unless omit.include?(:pub_date)
+    row << (item.acquired_at.strftime("%Y-%m-%d") rescue "") unless omit.include?(:acquired_at)
+    row << (manifestation.isbn rescue "") unless omit.include?(:isbn)
+    row << (item.call_number rescue "") unless omit.include?(:call_number)
+    row << (item.circulation_status.display_name.localize rescue "") unless omit.include?(:circulation_status)
 
     return row
   end
